@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mision help</title>
+</head>
+<body>
+    <script src="../assets/js/phaser.min.js"></script>
+    <script>
+        let _player;
+        let _cursor;
+        let _speed = 8;
+
+        const _config = {
+            type: Phaser.AUTO,
+            width: document.body.clientWidth,
+            height: document.body.clientHeight,
+            scene: {
+                preload: preload,
+                create: create,
+                update: update
+            }
+        }
+
+        const _game = new Phaser.Game(_config);
+        
+        function preload() {
+            _cursor = this.input.keyboard.createCursorKeys();
+            this.load.spritesheet('player','assets/image/player.png', {frameWidth: 233.75, frameHeight: 283.25 });
+        }
+        function create() {
+            _player = this.add.sprite(100,670,'player');
+            _player.setScale(0.25);
+
+            this.anims.create({
+                key: 'up',
+                frames: this.anims.generateFrameNumbers('player', { start: 4, end: 6 }),
+                frameRate: 30,
+                repeat: 1
+            });
+            this.anims.create({
+                key: 'down',
+                frames: this.anims.generateFrameNumbers('player', { start: 0, end: 3 }),
+                frameRate: 30,
+                repeat: 1
+            });
+            this.anims.create({
+                key: 'left',
+                frames: this.anims.generateFrameNumbers('player', { start: 8, end: 11 }),
+                frameRate: 30,
+                repeat: 1
+            });
+            this.anims.create({
+                key: 'right',
+                frames: this.anims.generateFrameNumbers('player', { start: 12, end: 15 }),
+                frameRate: 30,
+                repeat: 1
+            });
+            this.anims.create({
+                key: 'turn',
+                frames: [ { key: 'player', frame: 0 } ],
+                frameRate: 0
+            });
+        }
+        function update () {
+            if (_cursor.left.isDown) {
+                _player.x -= _speed;
+                _player.anims.play('left', true);
+
+            } else if (_cursor.right.isDown) {
+                _player.x += _speed;
+                _player.anims.play('right', true);
+
+            } else if (_cursor.up.isDown){
+                _player.y -= _speed;       
+                _player.anims.play('up', true);
+
+            } else if (_cursor.down.isDown) {
+                _player.y += _speed;
+                _player.anims.play('down', true);
+
+            } else {
+                _player.anims.play('turn', true);
+            }
+        }
+    </script>
+</body>
+</html>
