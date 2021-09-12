@@ -13,6 +13,7 @@
         let _player;
         let _cursor;
         let _speed = 12;
+        let _bullet;
 
         const _config = {
             type: Phaser.AUTO,
@@ -29,10 +30,13 @@
         
         function preload() {
             _cursor = this.input.keyboard.createCursorKeys();
-            this.load.spritesheet('player','assets/images/player.png', {frameWidth: 233.75, frameHeight: 283.25 });
+            this.load.spritesheet('player', 'assets/images/player/player.png', {frameWidth: 233.75, frameHeight: 283.25 });
+            this.load.image('bullet', 'assets/images/player/bullet.png');
         }
         function create() {
-            _player = this.add.sprite(100,670,'player');
+            _bullet = this.add.sprite(100, 670,'bullet');
+            
+            _player = this.add.sprite(100, 670, 'player');
             _player.setScale(0.25);
 
             this.anims.create({
