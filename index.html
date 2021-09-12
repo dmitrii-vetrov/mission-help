@@ -7,7 +7,7 @@
     <title>Mision help</title>
 </head>
 <body>
-    <script src="../assets/js/phaser.min.js"></script>
+    <script src="/assets//scripts/phaser/phaser.min.js"></script>
     <script>
         let _player;
         let _cursor;
@@ -28,7 +28,7 @@
         
         function preload() {
             _cursor = this.input.keyboard.createCursorKeys();
-            this.load.spritesheet('player','assets/image/player.png', {frameWidth: 233.75, frameHeight: 283.25 });
+            this.load.spritesheet('player','assets/images/player.png', {frameWidth: 233.75, frameHeight: 283.25 });
         }
         function create() {
             _player = this.add.sprite(100,670,'player');
