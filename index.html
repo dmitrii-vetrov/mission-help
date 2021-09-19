@@ -8,88 +8,11 @@
     <link rel="stylesheet" href="/app/styles/styles.css">
 </head>
 <body>
-    <script src="/assets//scripts/phaser/phaser.min.js"></script>
-    <script>
-        let _player;
-        let _cursor;
-        let _speed = 12;
-        let _bullet;
-
-        const _config = {
-            type: Phaser.AUTO,
-            width: document.body.clientWidth,
-            height: document.body.clientHeight,
-            scene: {
-                preload: preload,
-                create: create,
-                update: update
-            }
-        }
-
-        const _game = new Phaser.Game(_config);
-        
-        function preload() {
-            _cursor = this.input.keyboard.createCursorKeys();
-            this.load.spritesheet('player', 'assets/images/player/player.png', {frameWidth: 233.75, frameHeight: 283.25 });
-            this.load.image('bullet', 'assets/images/player/bullet.png');
-        }
-        function create() {
-            _bullet = this.add.sprite(100, 670,'bullet');
-            
-            _player = this.add.sprite(100, 670, 'player');
-            _player.setScale(0.25);
-
-            this.anims.create({
-                key: 'up',
-                frames: this.anims.generateFrameNumbers('player', { start: 4, end: 6 }),
-                frameRate: 30,
-                repeat: 1
-            });
-            this.anims.create({
-                key: 'down',
-                frames: this.anims.generateFrameNumbers('player', { start: 0, end: 3 }),
-                frameRate: 30,
-                repeat: 1
-            });
-            this.anims.create({
-                key: 'left',
-                frames: this.anims.generateFrameNumbers('player', { start: 8, end: 11 }),
-                frameRate: 30,
-                repeat: 1
-            });
-            this.anims.create({
-                key: 'right',
-                frames: this.anims.generateFrameNumbers('player', { start: 12, end: 15 }),
-                frameRate: 30,
-                repeat: 1
-            });
-            this.anims.create({
-                key: 'turn',
-                frames: [ { key: 'player', frame: 0 } ],
-                frameRate: 0
-            });
-        }
-        function update () {
-            if (_cursor.left.isDown) {
-                _player.x -= _speed;
-                _player.anims.play('left', true);
-
-            } else if (_cursor.right.isDown) {
-                _player.x += _speed;
-                _player.anims.play('right', true);
-
-            } else if (_cursor.up.isDown){
-                _player.y -= _speed;       
-                _player.anims.play('up', true);
-
-            } else if (_cursor.down.isDown) {
-                _player.y += _speed;
-                _player.anims.play('down', true);
-
-            } else {
-                _player.anims.play('turn', true);
-            }
-        }
-    </script>
+    
+    <script src="/assets/scripts/phaser/phaser.min.js"></script>
+    <script src="/app/scripts/manager/mainContainer.js"></script>
+    <script src="/app/scripts/player/player.js"></script>
+    
+    <script src="/app/scripts/manager/settings.js"></script>
 </body>
 </html>
