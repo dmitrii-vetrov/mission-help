@@ -12,8 +12,14 @@
     <script>
         let _player;
         let _cursor;
-        let _speed = 12;
+        let _speed = 7;
         let _bullet;
+        let keySpace;
+
+        let leftEdge = -50;
+        let rightEdge = document.body.clientWidth + 100;
+        let UpEdge = -50;
+        let downEdge = document.body.clientHeight + 50;
 
         const _config = {
             type: Phaser.AUTO,
@@ -35,9 +41,9 @@
         }
         function create() {
             _bullet = this.add.sprite(100, 670,'bullet');
-            
-            _player = this.add.sprite(100, 670, 'player');
+            _player = this.add.sprite(document.body.clientWidth / 2, document.body.clientHeight / 2, 'player');
             _player.setScale(0.25);
+            keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
             this.anims.create({
                 key: 'up',
@@ -68,6 +74,8 @@
                 frames: [ { key: 'player', frame: 0 } ],
                 frameRate: 0
             });
+
+            this.input.mouse.capture = true;
         }
         function update () {
             if (_cursor.left.isDown) {
@@ -88,6 +96,22 @@
 
             } else {
                 _player.anims.play('turn', true);
+            }
+            if (_player.x < leftEdge){
+                _player.x = rightEdge - 50;
+            }
+            if (_player.x > rightEdge) {
+                _player.x = leftEdge +20;
+            }
+            if (_player.y < UpEdge) {
+                _player.y = downEdge -20;
+            }
+            if (_player.y > downEdge) {
+                _player.y = UpEdge +20;
+            }
+
+            if (keySpace.isDown) {
+
             }
         }
     </script>
