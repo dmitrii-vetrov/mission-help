@@ -1,5 +1,4 @@
-
-export default class MainContainer {
+class MainContainer {
     modules = [];
 
     constructor() {
@@ -7,7 +6,6 @@ export default class MainContainer {
     }
 
     addModule(module) {
-        console.log(module);
         if(this.modules.indexOf(module) === -1) {
             this.modules.push(module);
         }

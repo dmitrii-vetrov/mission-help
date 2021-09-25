@@ -1,22 +1,22 @@
-import MainContainer from 'mainContainer';
-
-const mainContainer = new MainContainer();
-
-const _config = {
+const config = {
     type: Phaser.AUTO,
     width: document.body.clientWidth,
     height: document.body.clientHeight,
     scene: {
+        init: init,
         preload: preload,
         create: create,
         update: update
     }
 }
 
-const _game = new Phaser.Game(_config);
+const mainContainer = new MainContainer();
+const game = new Phaser.Game(config);
 
-mainContainer.addModule(new Player(_game))
-        
+function init() {
+    mainContainer.addModule(new PlayerModule(this))
+}
+
 function preload() {
     mainContainer.preload();
 }
