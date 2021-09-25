@@ -15,9 +15,11 @@
         let _speed = 7;
         let _bullet;
         let keySpace;
+        let fireDirection = null;
+        let fire = false;   
 
         let leftEdge = -50;
-        let rightEdge = document.body.clientWidth + 100;
+        let rightEdge = document.body.clientWidth + 50;
         let UpEdge = -50;
         let downEdge = document.body.clientHeight + 50;
 
@@ -110,8 +112,61 @@
                 _player.y = UpEdge +20;
             }
 
-            if (keySpace.isDown) {
+            //первый выстрел
+            if (keySpace.isDown && fire === false) {
+                fire = true;
+                _bullet.x = _player.x;
+                _bullet.y = _player.y;
 
+                if (_cursor.right.isDown === true) {
+                    fireDirection = 'right';
+                }
+                if (_cursor.left.isDown === true) {
+                    fireDirection = 'left';
+                }
+                if (_cursor.up.isDown === true) {
+                    fireDirection = 'up';
+                }
+                if (_cursor.down.isDown === true) {
+                    fireDirection = 'down';
+                }
+
+            }
+
+            if (fire === true) {
+                // лево
+                if (fireDirection === 'left') {
+                    _bullet.x -= 10;
+                }
+                // право
+                if (fireDirection === 'right') {
+                    _bullet.x += 10;
+                }
+                //вверх
+                if (fireDirection === 'up') {
+                    _bullet.y -= 10;
+                }
+                //вниз
+                if (fireDirection === 'down') {
+                    _bullet.y += 10;
+                }
+
+                //перезорятка
+
+                if (_bullet.x < -50) {
+                    fire = false;
+                }
+
+                if (_bullet.x > rightEdge) {
+                    fire = false;
+                }
+
+                if (_bullet.y < -50) {
+                    fire = false;
+                }
+                if (_bullet.y > downEdge) {
+                    fire = false;
+                }
             }
         }
     </script>
