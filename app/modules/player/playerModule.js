@@ -11,8 +11,8 @@ class PlayerModule {
 
     preload() {
         this.cursor = this.game.input.keyboard.createCursorKeys();
-        this.game.load.spritesheet('player', '../../../assets/images/player/player.png', {frameWidth: 233.75, frameHeight: 283.25 });
-        this.game.load.image('bullet', '../../../assets/images/player/bullet.png');
+        this.game.load.spritesheet('player', '/app/modules/player/images/player.png', {frameWidth: 233.75, frameHeight: 283.25 });
+        this.game.load.image('bullet', '/app/modules/player/images/bullet.png');
     }
 
     create() {
