@@ -14,7 +14,9 @@ const mainContainer = new MainContainer();
 const game = new Phaser.Game(config);
 
 function init() {
-    mainContainer.addModule(new PlayerModule(this))
+    mainContainer.addModule(new PlayerModule(this));
+    mainContainer.addModule(new PowerScaleModule(this));
+    mainContainer.addModule(new BulletModule(this));
 }
 
 function preload() {

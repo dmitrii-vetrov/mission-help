@@ -1,174 +1,18 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mision help</title>
-    <link rel="stylesheet" href="/app/styles/styles.css">
+    <title>Document</title>
+    <link rel="stylesheet" href="/assets/styles/styles.css">
 </head>
 <body>
-    <script src="/assets//scripts/phaser/phaser.min.js"></script>
-    <script>
-        let _player;
-        let _cursor;
-        let _speed = 7;
-        let _bullet;
-        let keySpace;
-        let fireDirection = null;
-        let fire = false;   
-
-        let leftEdge = -50;
-        let rightEdge = document.body.clientWidth + 50;
-        let UpEdge = -50;
-        let downEdge = document.body.clientHeight + 50;
-
-        const _config = {
-            type: Phaser.AUTO,
-            width: document.body.clientWidth,
-            height: document.body.clientHeight,
-            scene: {
-                preload: preload,
-                create: create,
-                update: update
-            }
-        }
-
-        const _game = new Phaser.Game(_config);
-        
-        function preload() {
-            _cursor = this.input.keyboard.createCursorKeys();
-            this.load.spritesheet('player', 'assets/images/player/player.png', {frameWidth: 233.75, frameHeight: 283.25 });
-            this.load.image('bullet', 'assets/images/player/bullet.png');
-        }
-        function create() {
-            _bullet = this.add.sprite(100, 670,'bullet');
-            _player = this.add.sprite(document.body.clientWidth / 2, document.body.clientHeight / 2, 'player');
-            _player.setScale(0.25);
-            keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-
-            this.anims.create({
-                key: 'up',
-                frames: this.anims.generateFrameNumbers('player', { start: 4, end: 6 }),
-                frameRate: 30,
-                repeat: 1
-            });
-            this.anims.create({
-                key: 'down',
-                frames: this.anims.generateFrameNumbers('player', { start: 0, end: 3 }),
-                frameRate: 30,
-                repeat: 1
-            });
-            this.anims.create({
-                key: 'left',
-                frames: this.anims.generateFrameNumbers('player', { start: 8, end: 11 }),
-                frameRate: 30,
-                repeat: 1
-            });
-            this.anims.create({
-                key: 'right',
-                frames: this.anims.generateFrameNumbers('player', { start: 12, end: 15 }),
-                frameRate: 30,
-                repeat: 1
-            });
-            this.anims.create({
-                key: 'turn',
-                frames: [ { key: 'player', frame: 0 } ],
-                frameRate: 0
-            });
-
-            this.input.mouse.capture = true;
-        }
-        function update () {
-            if (_cursor.left.isDown) {
-                _player.x -= _speed;
-                _player.anims.play('left', true);
-
-            } else if (_cursor.right.isDown) {
-                _player.x += _speed;
-                _player.anims.play('right', true);
-
-            } else if (_cursor.up.isDown){
-                _player.y -= _speed;       
-                _player.anims.play('up', true);
-
-            } else if (_cursor.down.isDown) {
-                _player.y += _speed;
-                _player.anims.play('down', true);
-
-            } else {
-                _player.anims.play('turn', true);
-            }
-            if (_player.x < leftEdge){
-                _player.x = rightEdge - 50;
-            }
-            if (_player.x > rightEdge) {
-                _player.x = leftEdge +20;
-            }
-            if (_player.y < UpEdge) {
-                _player.y = downEdge -20;
-            }
-            if (_player.y > downEdge) {
-                _player.y = UpEdge +20;
-            }
-
-            //первый выстрел
-            if (keySpace.isDown && fire === false) {
-                fire = true;
-                _bullet.x = _player.x;
-                _bullet.y = _player.y;
-
-                if (_cursor.right.isDown === true) {
-                    fireDirection = 'right';
-                }
-                if (_cursor.left.isDown === true) {
-                    fireDirection = 'left';
-                }
-                if (_cursor.up.isDown === true) {
-                    fireDirection = 'up';
-                }
-                if (_cursor.down.isDown === true) {
-                    fireDirection = 'down';
-                }
-
-            }
-
-            if (fire === true) {
-                // лево
-                if (fireDirection === 'left') {
-                    _bullet.x -= 10;
-                }
-                // право
-                if (fireDirection === 'right') {
-                    _bullet.x += 10;
-                }
-                //вверх
-                if (fireDirection === 'up') {
-                    _bullet.y -= 10;
-                }
-                //вниз
-                if (fireDirection === 'down') {
-                    _bullet.y += 10;
-                }
-
-                //перезорятка
-
-                if (_bullet.x < -50) {
-                    fire = false;
-                }
-
-                if (_bullet.x > rightEdge) {
-                    fire = false;
-                }
-
-                if (_bullet.y < -50) {
-                    fire = false;
-                }
-                if (_bullet.y > downEdge) {
-                    fire = false;
-                }
-            }
-        }
-    </script>
+    <script src="/assets/scripts/phaser.min.js"></script>
+    <script src="/app/modules/bullet/bullet.js"></script>   
+    <script src="/app/modules/powerScale/powerScale.js"></script>
+    <script src="/app/modules/player/playerModule.js"></script>
+    <script src="/app/modules/system/mainContainerModule.js"></script>
+    <script src="/app/modules/system/phaserSettingModule.js"></script>
 </body>
 </html>

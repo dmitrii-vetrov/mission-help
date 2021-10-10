@@ -2,7 +2,6 @@ class PlayerModule {
     game = null;
     player = null;
     cursor = null;
-    bullet = null;
     SPEED = 12;
 
     constructor(game) {
@@ -11,12 +10,10 @@ class PlayerModule {
 
     preload() {
         this.cursor = this.game.input.keyboard.createCursorKeys();
-        this.game.load.spritesheet('player', '../../../assets/images/player/player.png', {frameWidth: 233.75, frameHeight: 283.25 });
-        this.game.load.image('bullet', '../../../assets/images/player/bullet.png');
+        this.game.load.spritesheet('player', '/app/modules/player/images/player.png', {frameWidth: 233.75, frameHeight: 283.25 });
     }
 
     create() {
-        this.bullet = this.game.add.sprite(100, 670,'bullet');
         this.player = this.game.add.sprite(100, 670, 'player');
         this.player.setScale(0.25);
 
