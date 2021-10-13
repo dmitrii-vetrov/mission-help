@@ -47,6 +47,10 @@ class PlayerModule {
         });
     }
 
+    resize() {
+
+    }
+    
     update() {
         if (this.cursor.left.isDown) {
             this.player.x -= this.SPEED;
