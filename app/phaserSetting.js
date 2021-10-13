@@ -27,6 +27,7 @@ function init() {
 function preload() {
     mainContainer.preload();
 }
+
 function create() {
     mainContainer.create();
 
