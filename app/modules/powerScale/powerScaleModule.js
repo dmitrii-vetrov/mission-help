@@ -1,5 +1,5 @@
 class PowerScaleModule {
-    game = null;
+    name = 'PowerScaleModule';
     powerScale = null;
     scale = null;
     minX = 0;
@@ -8,22 +8,23 @@ class PowerScaleModule {
     damagePowerPercent = 0;
     maxDamage = 100;
     
-    constructor(game) {
-        this.game = game;
+    constructor() {
     }
 
     preload() {
-        this.game.load.image('powerScale', '/app/modules/powerScale/images/power-scale.png');
-        this.game.load.image('scale', '/app/modules/powerScale/images/scale.png');
+        phaser.load.image('powerScale', '/app/modules/powerScale/images/power-scale.png');
+        phaser.load.image('scale', '/app/modules/powerScale/images/scale.png');
     }
 
     create() {
-        this.powerScale = this.game.add.sprite(0, 0, 'powerScale');
-        this.scale = this.game.add.sprite(0, 0, 'scale');
+        this.powerScale = phaser.add.sprite(0, 0, 'powerScale');
+        this.scale = phaser.add.sprite(0, 0, 'scale');
+    }
 
+    resize() {
         // ширина экрана - половины ширины картинки - отступ от края 
-        this.powerScale.x = this.game.game.renderer.width - (this.powerScale.width / 2) - 10;
-        this.powerScale.y = this.game.game.renderer.height - (this.powerScale.height / 2) - 15;
+        this.powerScale.x = phaser.game.renderer.width - (this.powerScale.width / 2) - 10;
+        this.powerScale.y = phaser.game.renderer.height - (this.powerScale.height / 2) - 15;
 
         this.minX = this.powerScale.x - (this.powerScale.width / 2);
         this.maxX = this.powerScale.x + (this.powerScale.width / 2);
@@ -35,11 +36,11 @@ class PowerScaleModule {
     update() {
         const speed = 5;
         if (this.scale.x <= this.minX) {
-            this.direction = speed - 3;
+            this.direction = speed;
         }
 
         if (this.scale.x >= this.maxX) {
-            this.direction = -speed;
+            this.direction = -speed - 1;
         }
 
         this.scale.x += this.direction;
