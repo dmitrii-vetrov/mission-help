@@ -1,23 +1,21 @@
 class GhostBossModule {
-    game = null;
     ghostBoss = null;
     fist = null;
 
-    constructor(game) {
-        this.game = game;
+    constructor() {
     }
 
     preload() {
-        this.game.load.image('ghostBoss', '/app/modules/bosses/ghostBoss/images/ghost.png');
-        this.game.load.image('ghostBoss1', '/app/modules/bosses/ghostBoss/images/ghost1.png');
-        this.game.load.image('ghostBossFist', '/app/modules/bosses/ghostBoss/images/fist.png');
+        phaser.load.image('ghostBoss', '/app/modules/bosses/ghostBoss/images/ghost.png');
+        phaser.load.image('ghostBoss1', '/app/modules/bosses/ghostBoss/images/ghost1.png');
+        phaser.load.image('ghostBossFist', '/app/modules/bosses/ghostBoss/images/fist.png');
     }
 
     create() {
-        this.ghostBoss = this.game.add.sprite(this.game.game.renderer.width / 2, 100, 'ghostBoss');
+        this.ghostBoss = phaser.add.sprite(phaser.game.renderer.width / 2, 100, 'ghostBoss');
         this.ghostBoss.setScale(0.75);
 
-        this.fist = this.game.add.sprite(this.ghostBoss.x - 70, 100, 'ghostBossFist');
+        this.fist = phaser.add.sprite(this.ghostBoss.x - 70, 100, 'ghostBossFist');
     }
 
     update() {
@@ -25,6 +23,6 @@ class GhostBossModule {
         let playerPoints = new Phaser.Geom.Point(this.x,this.y+this.displayHeight/2);
         let ghostBossPoints = new Phaser.Geom.Point(this.x,this.y+this.displayHeight/2);
 
-        console.log(this.game.Math.Angle.BetweenPoints(playerPoints, ghostBossPoints))
+       //console.log(phaser.Math.Angle.BetweenPoints(playerPoints, ghostBossPoints))
     }
 }
