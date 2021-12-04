@@ -17,6 +17,7 @@ function init() {
     mainContainer.addModule(new PlayerModule(this));
     mainContainer.addModule(new PowerScaleModule(this));
     mainContainer.addModule(new BulletModule(this));
+    mainContainer.addModule(new GhostBossModule(this));
 }
 
 function preload() {
