@@ -20,8 +20,8 @@ let phaser = null;
 function init() {
     phaser = this;
     mainContainer.addModule(new BackgroundModule());
+    mainContainer.addModule(new PlayerModule());    
     mainContainer.addModule(new GhostBossModule());
-    mainContainer.addModule(new PlayerModule());
     mainContainer.addModule(new PowerScaleModule());
     mainContainer.addModule(new BulletModule());
 }
