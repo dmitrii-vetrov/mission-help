@@ -1,4 +1,4 @@
-class PowerScaleModule {
+ class PowerScaleModule {
     name = 'PowerScaleModule';
     powerScale = null;
     scale = null;
@@ -17,7 +17,7 @@ class PowerScaleModule {
     }
 
     create() {
-        this.powerScale = phaser.add.sprite(0, 0, 'powerScale');
+        this.powerScale = phaser.add.sprite(0, 0, 'powerScale'); 
         this.scale = phaser.add.sprite(0, 0, 'scale');
     }
 
@@ -34,6 +34,7 @@ class PowerScaleModule {
     }
 
     update() {
+        // движения ползунка
         const speed = 5;
         if (this.scale.x <= this.minX) {
             this.direction = speed;
@@ -45,6 +46,7 @@ class PowerScaleModule {
 
         this.scale.x += this.direction;
 
+        // сила удара
         let currentDamagePower = 0;
 
         const sectionWidth = this.powerScale.width / 4;

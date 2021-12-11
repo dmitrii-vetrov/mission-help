@@ -7,16 +7,16 @@ class MainContainer {
     }
 
     addModule(module) {
-        if (!module.name) {
-            console.warn(`${this.name}: Added Module not contains NAME property`);
-        }
+        // if (!module.name) {
+        //     console.warn(`${this.name}: Added Module not contains NAME property`);
+        // }
 
-        for (let i = 0; i < this.modules.length; i++) {
-            if(module.name === this.modules[i].name) {
-                console.warn(`${this.name}: Module ${module.name} has already been  added`);
-                return false;
-            }
-        }
+        // for (let i = 0; i < this.modules.length; i++) {
+        //     if(module.name === this.modules[i].name) {
+        //         console.warn(`${this.name}: Module ${module.name} has already been  added`);
+        //         return false;
+        //     }
+        // }
 
         this.modules.push(module);
     }
