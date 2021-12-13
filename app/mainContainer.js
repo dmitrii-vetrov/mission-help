@@ -53,19 +53,19 @@ class MainContainer {
         });
     }
 
-    getModuleByNamw(moduleName) {
-        if (!moduleName) {
-            console.warn(`${this.name}: ${moduleName} not defined`);
+    // getModuleByNamw(moduleName) {
+    //     if (!moduleName) {
+    //         console.warn(`${this.name}: ${moduleName} not defined`);
 
-            return false;
-        }
+    //         return false;
+    //     }
 
-        for (let i = 0; i < this.modules.length; i++) {
-            if(moduleName === this.modules[i].name) {
-                return this.modules[i];
-            }
-        }
+    //     for (let i = 0; i < this.modules.length; i++) {
+    //         if(moduleName === this.modules[i].name) {
+    //             return this.modules[i];
+    //         }
+    //     }
         
-        console.warn(`${this.name}: ${moduleName} not found`);
-    }
+    //     console.warn(`${this.name}: ${moduleName} not found`);
+    // }
 }

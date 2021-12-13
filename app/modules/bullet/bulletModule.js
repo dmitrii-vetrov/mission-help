@@ -14,5 +14,6 @@ class BulletModule {
     }
 
     update() {
+        // this.bullet.x = playerModule.player.x;
     }
 }
