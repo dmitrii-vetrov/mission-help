@@ -2,7 +2,7 @@ class PlayerModule {
     name = 'PlayerModule';
     player = null;
     cursor = null;
-    SPEED = 12;
+    SPEED = 7;
 
     constructor() {
     }
@@ -13,7 +13,7 @@ class PlayerModule {
     }
 
     create() {
-        this.player = phaser.add.sprite(100, 670, 'player');
+        this.player = phaser.add.sprite(phaser.game.renderer.width / 2, 670, 'player');
         this.player.setScale(0.25);
 
         phaser.anims.create({
@@ -71,5 +71,18 @@ class PlayerModule {
         } else {
             this.player.anims.play('turn', true);
         }
+
+        if (this.player.x >= 1070) {
+            this.player.x -= this.SPEED;
+        }
+
+        if (this.player.x <= 400) {
+            this.player.x += this.SPEED;
+        }
     }
+
+    getPlayer() {
+        return this.player;
+    }
+
 }

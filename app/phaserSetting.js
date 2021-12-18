@@ -17,13 +17,19 @@ const mainContainer = new MainContainer();
 const game = new Phaser.Game(config);
 let phaser = null;
 
+let backgroundModule = new BackgroundModule();
+let playerModule = new PlayerModule();
+let ghostBossModule = new GhostBossModule();
+let bulletModule = new BulletModule();
+let powerScaleModule = new PowerScaleModule();
+
 function init() {
     phaser = this;
-    mainContainer.addModule(new BackgroundModule());
-    mainContainer.addModule(new PlayerModule());
-    mainContainer.addModule(new GhostBossModule());
-    mainContainer.addModule(new PowerScaleModule());
-    mainContainer.addModule(new BulletModule());
+    mainContainer.addModule(backgroundModule);
+    mainContainer.addModule(playerModule);
+    mainContainer.addModule(ghostBossModule);
+    mainContainer.addModule(bulletModule);
+    mainContainer.addModule(powerScaleModule);
 }
 
 function preload() {
