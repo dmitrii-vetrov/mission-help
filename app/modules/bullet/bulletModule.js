@@ -6,11 +6,11 @@ class BulletModule {
     }
 
     preload() {
-        phaser.load.image('bullet', '/app/modules/bullet/images/bullet.png');
+        _phaser.load.image('bullet', '/app/modules/bullet/images/bullet.png');
     }
 
     create() {
-        this.bullet = phaser.add.sprite(100, 100,'bullet');
+        this.bullet = _phaser.add.sprite(100, 100,'bullet');
     }
 
     update() {

@@ -12,19 +12,19 @@
     }
 
     preload() {
-        phaser.load.image('powerScale', '/app/modules/powerScale/images/power-scale.png');
-        phaser.load.image('scale', '/app/modules/powerScale/images/scale.png');
+        _phaser.load.image('powerScale', '/app/modules/powerScale/images/power-scale.png');
+        _phaser.load.image('scale', '/app/modules/powerScale/images/scale.png');
     }
 
     create() {
-        this.powerScale = phaser.add.sprite(0, 0, 'powerScale'); 
-        this.scale = phaser.add.sprite(0, 0, 'scale');
+        this.powerScale = _phaser.add.sprite(0, 0, 'powerScale'); 
+        this.scale = _phaser.add.sprite(0, 0, 'scale');
     }
 
     resize() {
         // ширина экрана - половины ширины картинки - отступ от края 
-        this.powerScale.x = phaser.game.renderer.width - (this.powerScale.width / 2) - 10;
-        this.powerScale.y = phaser.game.renderer.height - (this.powerScale.height / 2) - 15;
+        this.powerScale.x = _phaser.game.renderer.width - (this.powerScale.width / 2) - 10;
+        this.powerScale.y = _phaser.game.renderer.height - (this.powerScale.height / 2) - 15;
 
         this.minX = this.powerScale.x - (this.powerScale.width / 2);
         this.maxX = this.powerScale.x + (this.powerScale.width / 2);

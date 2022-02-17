@@ -8,39 +8,35 @@ class PlayerModule {
     }
 
     preload() {
-        this.cursor = phaser.input.keyboard.createCursorKeys();
-        phaser.load.spritesheet('player', '/app/modules/player/images/player.png', {frameWidth: 233.75, frameHeight: 283.25 });
+        this.cursor = _phaser.input.keyboard.createCursorKeys();
+        _phaser.load.spritesheet('player', '/app/modules/player/images/player.png', {frameWidth: 233.75, frameHeight: 283.25 });
     }
 
     create() {
-        this.player = phaser.add.sprite(phaser.game.renderer.width / 2, 670, 'player');
+        this.player = _phaser.add.sprite(_phaser.game.renderer.width / 2, 670, 'player');
         this.player.setScale(0.25);
 
-        phaser.anims.create({
+        _phaser.anims.create({
             key: 'up',
-            frames: phaser.anims.generateFrameNumbers('player', { start: 4, end: 6 }),
-            frameRate: 30,
-            repeat: 1
+            frames: _phaser.anims.generateFrameNumbers('player', { start: 4, end: 6 }),
+            frameRate: 30
         });
-        phaser.anims.create({
+        _phaser.anims.create({
             key: 'down',
-            frames: phaser.anims.generateFrameNumbers('player', { start: 0, end: 3 }),
-            frameRate: 30,
-            repeat: 1
+            frames: _phaser.anims.generateFrameNumbers('player', { start: 0, end: 3 }),
+            frameRate: 30
         });
-        phaser.anims.create({
+        _phaser.anims.create({
             key: 'left',
-            frames: phaser.anims.generateFrameNumbers('player', { start: 8, end: 11 }),
-            frameRate: 30,
-            repeat: 1
+            frames: _phaser.anims.generateFrameNumbers('player', { start: 8, end: 11 }),
+            frameRate: 30
         });
-        phaser.anims.create({
+        _phaser.anims.create({
             key: 'right',
-            frames: phaser.anims.generateFrameNumbers('player', { start: 12, end: 15 }),
-            frameRate: 30,
-            repeat: 1
+            frames: _phaser.anims.generateFrameNumbers('player', { start: 12, end: 15 }),
+            frameRate: 30
         });
-        phaser.anims.create({
+        _phaser.anims.create({
             key: 'turn',
             frames: [ { key: 'player', frame: 0 } ],
             frameRate: 0
