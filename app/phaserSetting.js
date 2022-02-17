@@ -3,6 +3,7 @@ const _battleFieldContentId = _battleFieldId + '-content';
 const _factor = 0.75;
 const _battleField = document.getElementById(_battleFieldId);
 const _hiddenClass = 'battlefield_preload';
+const _preloaderText = document.getElementById('js-preloader-text-1');
 
 function showBattleField() {
     if (_battleField.classList.contains(_hiddenClass)) {
@@ -30,6 +31,12 @@ function onResize() {
     _mainContainer .resize();
 }
 
+const _backgroundModule = new BackgroundModule();
+const _playerModule = new PlayerModule();
+const _ghostBossModule = new GhostBossModule();
+const _powerScaleModule = new PowerScaleModule();
+const _bulletModule = new BulletModule();
+
 const _config = {
     type: Phaser.AUTO,
     parent: _battleFieldContentId,
@@ -40,11 +47,11 @@ const _config = {
     scene: {
         init: function() {
             _phaser = this;
-            _mainContainer.addModule(new BackgroundModule());
-            _mainContainer.addModule(new PlayerModule());
-            _mainContainer.addModule(new GhostBossModule());
-            _mainContainer.addModule(new PowerScaleModule());
-            _mainContainer.addModule(new BulletModule());
+            _mainContainer.addModule(_backgroundModule);
+            _mainContainer.addModule(_playerModule);
+            _mainContainer.addModule(_ghostBossModule);
+            _mainContainer.addModule(_powerScaleModule);
+            _mainContainer.addModule(_bulletModule);
         },
         preload: function() {
             _mainContainer.preload();
@@ -55,9 +62,11 @@ const _config = {
             window.addEventListener('resize', onResize);
             onResize();
 
-            _phaser.time.addEvent({
-                delay: 1000,
-                callback: showBattleField
+            _preloaderText.addEventListener('animationend', () => {
+                _phaser.time.addEvent({
+                    delay: 400,
+                    callback: showBattleField
+                });
             });
         },
         update: function() {
