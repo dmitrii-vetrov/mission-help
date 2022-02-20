@@ -14,22 +14,22 @@ class GhostBossModule {
     
 
     preload() {
-        phaser.load.image('ghostBoss', '/app/modules/bosses/ghostBoss/images/ghost.png');
-        phaser.load.image('ghostBoss1', '/app/modules/bosses/ghostBoss/images/ghost1.png');
-        phaser.load.image('ghostBossFist', '/app/modules/bosses/ghostBoss/images/fist.png');
+        _phaser.load.image('ghostBoss', '/app/modules/bosses/ghostBoss/images/ghost.png');
+        _phaser.load.image('ghostBoss1', '/app/modules/bosses/ghostBoss/images/ghost1.png');
+        _phaser.load.image('ghostBossFist', '/app/modules/bosses/ghostBoss/images/fist.png');
     }
 
     create() {
-        this.ghostBoss = phaser.add.sprite(phaser.game.renderer.width / 2,280, 'ghostBoss');
+        this.ghostBoss = _phaser.add.sprite(_phaser.game.renderer.width / 2, 280, 'ghostBoss');
         this.ghostBoss.setScale(0.75);
         this.ghostBoss.alpha = 0.6;
 
-        this.fistOrigin = phaser.add.sprite(this.ghostBoss.x - 70, this.ghostBoss.y, 'ghostBossFist');
+        this.fistOrigin = _phaser.add.sprite(this.ghostBoss.x - 70, this.ghostBoss.y, 'ghostBossFist');
         this.fistOrigin.alpha = this.ghostBoss.alpha;
 
         let i = 0;
         while (i < 10) {
-            this.atackFists.push(phaser.add.sprite(-100, -100, 'ghostBossFist'));
+            this.atackFists.push(_phaser.add.sprite(-100, -100, 'ghostBossFist'));
 
             i++;
         }
@@ -51,13 +51,13 @@ class GhostBossModule {
         }
         this.fistOrigin.x = this.ghostBoss.x - 70;
 
-        if (this.isCanBossMove == true){
+        if (this.isCanBossMove === true){
             this.moveBoss();
         }
 
-        // let playerPoints = new Phaser.Geom.Point(this.x,this.y+this.displayHeight/2);
-        // let ghostBossPoints = new Phaser.Geom.Point(this.x,this.y+this.displayHeight/2);
-        //console.log(phaser.Math.Angle.BetweenPoints(playerPoints, ghostBossPoints))
+        // let playerPoints = new _phaser.Geom.Point(this.x,this.y+this.displayHeight/2);
+        // let ghostBossPoints = new _phaser.Geom.Point(this.x,this.y+this.displayHeight/2);
+        //console.log(_phaser.Math.Angle.BetweenPoints(playerPoints, ghostBossPoints))
 
         if (this.isCanisCanSoot == true) {
             this.isCanisCanSoot = false;
@@ -74,9 +74,9 @@ class GhostBossModule {
         let attackTargets = this.atackFists;
         attackTargets.push(this.fistOrigin);
 
-        phaser.tweens.add({
+        _phaser.tweens.add({
             targets: attackTargets,
-            y: phaser.game.renderer.height,
+            y: _phaser.game.renderer.height,
             duration: 500,
             repeat: 0,
             onStart: () => {
@@ -84,7 +84,7 @@ class GhostBossModule {
 
                 this.atackFists.forEach((fist, i) => {
                     fist.alpha = this.fistOrigin.alpha;
-                    fist.x = (phaser.game.renderer.width / this.atackFists.length) * (i + 1);
+                    fist.x = (_phaser.game.renderer.width / this.atackFists.length) * (i + 1);
                     this.setAddFistsY(fist, i);
                 })
             },
@@ -92,7 +92,7 @@ class GhostBossModule {
                 // анимация исчезновения (прозрачность 0)
                 attackTargets.push(this.ghostBoss);
 
-                phaser.tweens.add({
+                _phaser.tweens.add({
                     targets: attackTargets,
                     alpha: 0,
                     duration: 350,
@@ -104,7 +104,7 @@ class GhostBossModule {
                         this.isCanBossMove = true;
 
                         // анимация появления (прозрачность 1)
-                        phaser.tweens.add({
+                        _phaser.tweens.add({
                             targets: [this.fistOrigin, this.ghostBoss],
                             alpha: 0.6,
                             duration: 350,
@@ -175,14 +175,5 @@ class GhostBossModule {
 
         //  this.ghostBoss.x = playerModule.getPlayer().x;
         // console.log(this.ghostBoss.x)
-        
-
-    
-    
-    
-    }    
-    
-
-
-   
+   }
 }
