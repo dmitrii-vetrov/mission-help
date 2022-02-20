@@ -2,7 +2,7 @@ class GhostBossModule {
     name = 'GhostBossModule';
     ghostBoss = null;
     fistOrigin = null;
-    isCanisCanSoot = true;
+    isCanShoot = true;
     isToushXMin = false;
     isCanBossMove = true;
 
@@ -33,90 +33,83 @@ class GhostBossModule {
 
             i++;
         }
+
+        //стрельба (шанс)
+        this.isCanShootProcess();
     }
 
     update() {
-         this.isCanSoot = Phaser.Math.Between(1,10);
-
-        if (this.ghostBoss.x == 700) {
-            let isCanSoot = Phaser.Math.Between(1,10);
-            console.log(Phaser.Math.Between(1,10));     
-        }
-
-        if (this.isCanSoot >= 7) {
-            this.isCanSoot = false;
-        }
-        if (this.isCanSoot <=8 ) {
-            this.isCancSoot = true
-        }
         this.fistOrigin.x = this.ghostBoss.x - 70;
 
         if (this.isCanBossMove === true){
             this.moveBoss();
         }
-
-        // let playerPoints = new _phaser.Geom.Point(this.x,this.y+this.displayHeight/2);
-        // let ghostBossPoints = new _phaser.Geom.Point(this.x,this.y+this.displayHeight/2);
-        //console.log(_phaser.Math.Angle.BetweenPoints(playerPoints, ghostBossPoints))
-
-        if (this.isCanisCanSoot == true) {
-            this.isCanisCanSoot = false;
-            this.doisCanSoot();
-        }
-        
- 
-       
-    
     }
-    // анимация удара
-    doisCanSoot() {
-        // начало анимации удара (летит вниз)
-        let attackTargets = this.atackFists;
-        attackTargets.push(this.fistOrigin);
 
+    isCanShootProcess() {
+        _phaser.time.addEvent( {
+            delay: 3000,
+            callback: () => {
+                if(Phaser.Math.Between(0, 10) < 4){
+                    this.doShoot();
+                }
+            },
+            loop: true,
+            repeat: 0
+        });
+    }
+
+    // анимация удара
+    doShoot() {
+        let attackTargets = this.atackFists;
+
+        // кулак летит на вверх
         _phaser.tweens.add({
-            targets: attackTargets,
-            y: _phaser.game.renderer.height,
-            duration: 500,
-            repeat: 0,
+            targets: this.fistOrigin,
+            y: -this.fistOrigin.height,
+            duration: 300,
             onStart: () => {
                 this.isCanBossMove = false;
-
-                this.atackFists.forEach((fist, i) => {
-                    fist.alpha = this.fistOrigin.alpha;
-                    fist.x = (_phaser.game.renderer.width / this.atackFists.length) * (i + 1);
-                    this.setAddFistsY(fist, i);
-                })
             },
-             onComplete: () => {
-                // анимация исчезновения (прозрачность 0)
-                attackTargets.push(this.ghostBoss);
-
+            onComplete: () => {
+                // кулаки летят вниз
                 _phaser.tweens.add({
                     targets: attackTargets,
-                    alpha: 0,
-                    duration: 350,
+                    y: getSceneHeight(),
+                    duration: 700,
                     repeat: 0,
                     onStart: () => {
+                        this.atackFists.forEach((fist, i) => {
+                            fist.alpha = this.fistOrigin.alpha;
+                            fist.x = (getSceneWidth() / this.atackFists.length) * (i + 1);
+                            this.setAddFistsY(fist, i);
+                        })
                     },
                     onComplete: () => {
-                        this.fistOrigin.y = this.ghostBoss.y;
-                        this.isCanBossMove = true;
-
-                        // анимация появления (прозрачность 1)
+                        // анимация исчезновения (прозрачность 0)
                         _phaser.tweens.add({
-                            targets: [this.fistOrigin, this.ghostBoss],
-                            alpha: 0.6,
-                            duration: 350,
+                            targets: attackTargets,
+                            alpha: 0,
+                            duration: 250,
                             repeat: 0,
-                            onStart: () => {
-                            },
                             onComplete: () => {
+                                this.fistOrigin.y = this.ghostBoss.y;
+        
+                                // анимация появления (прозрачность 1)
+                                _phaser.tweens.add({
+                                    targets: [this.fistOrigin, this.ghostBoss],
+                                    alpha: 0.6,
+                                    duration: 250,
+                                    repeat: 0,
+                                    onComplete: () => {
+                                        this.isCanBossMove = true;
+                                    }
+                                })
                             },
                         })
                     },
                 })
-            },
+            }
         })
    }
 
@@ -161,7 +154,7 @@ class GhostBossModule {
             this.ghostBoss.x -= 5;           
         }
         
-        if (this.ghostBoss.x < 400) {
+        if (this.ghostBoss.x < 0) {
             this.isToushXMin = true;
         }
 
@@ -169,7 +162,7 @@ class GhostBossModule {
             this.ghostBoss.x += 5;
         }
 
-        if (this.ghostBoss.x > 1070) {
+        if (this.ghostBoss.x > getSceneWidth()) {
             this.isToushXMin = false;
         }
 

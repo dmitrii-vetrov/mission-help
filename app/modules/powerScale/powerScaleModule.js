@@ -19,6 +19,7 @@
     create() {
         this.powerScale = _phaser.add.sprite(0, 0, 'powerScale'); 
         this.scale = _phaser.add.sprite(0, 0, 'scale');
+        this.powerScale.alpha = 0.5;
     }
 
     resize() {

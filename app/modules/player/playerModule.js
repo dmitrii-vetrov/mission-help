@@ -48,6 +48,7 @@ class PlayerModule {
     }
     
     update() {
+        // управления
         if (this.cursor.left.isDown) {
             this.player.x -= this.SPEED;
             this.player.anims.play('left', true);
@@ -67,15 +68,22 @@ class PlayerModule {
         } else {
             this.player.anims.play('turn', true);
         }
-
-        if (this.player.x >= 1070) {
+        // место хлдьбы 
+        if (this.player.x >= getSceneWidth()) {
             this.player.x -= this.SPEED;
         }
 
-        if (this.player.x <= 400) {
+        if (this.player.x <= 0) {
             this.player.x += this.SPEED;
         }
 
+        if (this.player.y <= 425) {
+            this.player.y += this.SPEED;
+        }
+        
+        if (this.player.y >= getSceneHeight()) {
+            this.player.y -= this.SPEED;
+        }
     }
 
     getPlayer() {

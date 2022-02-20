@@ -11,6 +11,16 @@ class BulletModule {
 
     create() {
         this.bullet = _phaser.add.sprite(100, 100,'bullet');
+
+        _phaser.time.addEvent( {
+            delay: 3000,
+            callback: () => {
+                this.bullet.x = Phaser.Math.Between(0, getSceneWidth());
+                this.bullet.y = Phaser.Math.Between(425, getSceneHeight());
+            },
+            loop: true,
+            repeat: 0
+        });
     }
 
     update() {
