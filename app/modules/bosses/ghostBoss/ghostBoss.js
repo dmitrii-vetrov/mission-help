@@ -2,13 +2,16 @@ class GhostBossModule {
     name = 'GhostBossModule';
     ghostBoss = null;
     fistOrigin = null;
-    isCanShoot = true;
+    isCanisCanSoot = true;
     isToushXMin = false;
     isCanBossMove = true;
+
+
     atackFists = [];
 
     constructor() {
     }
+    
 
     preload() {
         phaser.load.image('ghostBoss', '/app/modules/bosses/ghostBoss/images/ghost.png');
@@ -17,7 +20,7 @@ class GhostBossModule {
     }
 
     create() {
-        this.ghostBoss = phaser.add.sprite(phaser.game.renderer.width / 2, 280, 'ghostBoss');
+        this.ghostBoss = phaser.add.sprite(phaser.game.renderer.width / 2,280, 'ghostBoss');
         this.ghostBoss.setScale(0.75);
         this.ghostBoss.alpha = 0.6;
 
@@ -33,6 +36,19 @@ class GhostBossModule {
     }
 
     update() {
+         this.isCanSoot = Phaser.Math.Between(1,10);
+
+        if (this.ghostBoss.x == 700) {
+            let isCanSoot = Phaser.Math.Between(1,10);
+            console.log(Phaser.Math.Between(1,10));     
+        }
+
+        if (this.isCanSoot >= 7) {
+            this.isCanSoot = false;
+        }
+        if (this.isCanSoot <=8 ) {
+            this.isCancSoot = true
+        }
         this.fistOrigin.x = this.ghostBoss.x - 70;
 
         if (this.isCanBossMove == true){
@@ -43,13 +59,17 @@ class GhostBossModule {
         // let ghostBossPoints = new Phaser.Geom.Point(this.x,this.y+this.displayHeight/2);
         //console.log(phaser.Math.Angle.BetweenPoints(playerPoints, ghostBossPoints))
 
-        if (this.isCanShoot === true) {
-            this.isCanShoot = false;
-            this.doShoot();
+        if (this.isCanisCanSoot == true) {
+            this.isCanisCanSoot = false;
+            this.doisCanSoot();
         }
+        
+ 
+       
+    
     }
     // анимация удара
-    doShoot() {
+    doisCanSoot() {
         // начало анимации удара (летит вниз)
         let attackTargets = this.atackFists;
         attackTargets.push(this.fistOrigin);
@@ -68,7 +88,7 @@ class GhostBossModule {
                     this.setAddFistsY(fist, i);
                 })
             },
-            onComplete: () => {
+             onComplete: () => {
                 // анимация исчезновения (прозрачность 0)
                 attackTargets.push(this.ghostBoss);
 
@@ -101,7 +121,7 @@ class GhostBossModule {
    }
 
    // дополнительная атака
-   setAddFistsY(sprite, i) {
+   setAddFistsY(sprite, i) {      
         if (i === 0) {
             sprite.y = -600;
         }
@@ -132,27 +152,37 @@ class GhostBossModule {
         if (i === 9) {
             sprite.y = -600;
         }
+       
    }
 
    // движения босса
-   moveBoss() {
-    if(this.isToushXMin === false) {
-        this.ghostBoss.x -= 5;           
-    }
-    
-    if (this.ghostBoss.x < 400) {
-        this.isToushXMin = true;
-    }
+    moveBoss() {
+        if(this.isToushXMin === false) {
+            this.ghostBoss.x -= 5;           
+        }
+        
+        if (this.ghostBoss.x < 400) {
+            this.isToushXMin = true;
+        }
 
-    if(this.isToushXMin === true){
-        this.ghostBoss.x += 5;
-    }
+        if(this.isToushXMin === true){
+            this.ghostBoss.x += 5;
+        }
 
-    if (this.ghostBoss.x > 1070) {
-        this.isToushXMin = false;
-    }
+        if (this.ghostBoss.x > 1070) {
+            this.isToushXMin = false;
+        }
 
-        // this.ghostBoss.x = playerModule.getPlayer().x;
+        //  this.ghostBoss.x = playerModule.getPlayer().x;
         // console.log(this.ghostBoss.x)
-   }
+        
+
+    
+    
+    
+    }    
+    
+
+
+   
 }

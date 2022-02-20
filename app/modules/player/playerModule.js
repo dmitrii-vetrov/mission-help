@@ -79,6 +79,7 @@ class PlayerModule {
         if (this.player.x <= 400) {
             this.player.x += this.SPEED;
         }
+
     }
 
     getPlayer() {
