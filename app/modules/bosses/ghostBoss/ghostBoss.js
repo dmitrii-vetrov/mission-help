@@ -84,7 +84,7 @@ class GhostBossModule {
                     onStart: () => {
                         this.atackFists.forEach((fist, i) => {
                             fist.alpha = this.fistOrigin.alpha;
-                            fist.x = (getSceneWidth() / this.atackFists.length) * (i + 0.5);
+                            fist.x = (getSceneWidth() / this.atackFists.length) * (i + Phaser.Math.Between(0.35, 0.55));
                             this.setAddFistsY(fist, i);
                         })
                     },

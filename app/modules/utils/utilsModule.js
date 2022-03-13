@@ -5,3 +5,7 @@ function getSceneWidth() {
 function getSceneHeight() {
     return _phaser.game.renderer.height;
 }
+
+function createLives() {
+    
+}

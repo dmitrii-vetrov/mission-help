@@ -7,7 +7,7 @@ class PlayerModule {
     health2;
     health3;
     healthContainer = null;
-    
+    iifes = null;
 
     constructor() {
     }
@@ -21,14 +21,9 @@ class PlayerModule {
     create() {
         this.player = _phaser.physics.add.sprite(_phaser.game.renderer.width / 2, 670, 'player');
         this.player.setScale(0.25);
-        this.healthContainer = _phaser.add.container(this.player.x, this.player.y - 40);
-        this.health1 = _phaser.add.sprite(-45, 0, 'health');
-        this.health2 = _phaser.add.sprite(0, 0, 'health');
-        this.health3 = _phaser.add.sprite(45, 0, 'health');
-        this.healthContainer.add(this.health1);
-        this.healthContainer.add(this.health2);
-        this.healthContainer.add(this.health3);
-        this.healthContainer.setScale(0.35);
+        this.player.setOrigin(0.5, 0.5);
+
+        this.iifes = liveFactory('health', 3);
 
         _phaser.anims.create({
             key: 'up',
@@ -61,26 +56,15 @@ class PlayerModule {
             i++;
 
             if (i === 1) {
-                if (this.health1.alpha === 1) {
-                    this.health1.alpha = 0;
-                    
-                } else {
-                    if (this.health2.alpha === 1) {
-                        this.health2.alpha = 0;
-
-                    } else {
-                        this.health3.alpha = 0;
-                    }
-                }
+                this.iifes.decrement(1);
 
                 _phaser.time.addEvent({
                     delay: 500,
                     callback: () => {
                         i = 0;
                     }
-                })
+                });
             }
-
         });
     }
 
@@ -127,12 +111,11 @@ class PlayerModule {
             this.player.y -= this.SPEED;
         }
 
-        this.healthContainer.x = this.player.x;
-        this.healthContainer.y = this.player.y - 40;
+        this.iifes.container.x = this.player.x;
+        this.iifes.container.y = this.player.y - (this.player.height * this.player.scaleY) / 1.7;
     }
 
     getPlayer() {
         return this.player;
     }
-
 }
