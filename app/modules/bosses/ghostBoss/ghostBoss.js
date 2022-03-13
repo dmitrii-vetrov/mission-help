@@ -30,7 +30,7 @@ class GhostBossModule {
 
         let i = 0;
         while (i < 8) {
-            this.atackFists.push(_phaser.add.sprite(-100, -100, 'ghostBossFist'));
+            this.atackFists.push(_phaser.physics.add.sprite(-100, -100, 'ghostBossFist'));
 
             i++;
         }
@@ -51,7 +51,7 @@ class GhostBossModule {
         _phaser.time.addEvent( {
             delay: 3000,
             callback: () => {
-                if(Phaser.Math.Between(0, 10) < 4) {
+                if(Phaser.Math.Between(0, 10) < 9) {
                     this.doShoot();
                 }
             },
@@ -173,5 +173,13 @@ class GhostBossModule {
 
         //  this.ghostBoss.x = playerModule.getPlayer().x;
         // console.log(this.ghostBoss.x)
+   }
+
+   getBullets() {
+       return this.atackFists;
+   }
+
+   getBoss() {
+       return this.ghostBoss;
    }
 }

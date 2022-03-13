@@ -3,6 +3,11 @@ class PlayerModule {
     player = null;
     cursor = null;
     SPEED = 7;
+    health1;
+    health2;
+    health3;
+    healthContainer = null;
+    
 
     constructor() {
     }
@@ -10,11 +15,20 @@ class PlayerModule {
     preload() {
         this.cursor = _phaser.input.keyboard.createCursorKeys();
         _phaser.load.spritesheet('player', '/app/modules/player/images/player.png', {frameWidth: 233.75, frameHeight: 283.25 });
+        _phaser.load.image('health', '/app/modules/player/images/health.png');
     }
 
     create() {
-        this.player = _phaser.add.sprite(_phaser.game.renderer.width / 2, 670, 'player');
+        this.player = _phaser.physics.add.sprite(_phaser.game.renderer.width / 2, 670, 'player');
         this.player.setScale(0.25);
+        this.healthContainer = _phaser.add.container(this.player.x, this.player.y - 40);
+        this.health1 = _phaser.add.sprite(-45, 0, 'health');
+        this.health2 = _phaser.add.sprite(0, 0, 'health');
+        this.health3 = _phaser.add.sprite(45, 0, 'health');
+        this.healthContainer.add(this.health1);
+        this.healthContainer.add(this.health2);
+        this.healthContainer.add(this.health3);
+        this.healthContainer.setScale(0.35);
 
         _phaser.anims.create({
             key: 'up',
@@ -41,6 +55,33 @@ class PlayerModule {
             frames: [ { key: 'player', frame: 0 } ],
             frameRate: 0
         });
+
+        var i = 0;
+        _phaser.physics.add.collider(this.player, _ghostBossModule.getBullets(), () => {
+            i++;
+
+            if (i === 1) {
+                if (this.health1.alpha === 1) {
+                    this.health1.alpha = 0;
+                    
+                } else {
+                    if (this.health2.alpha === 1) {
+                        this.health2.alpha = 0;
+
+                    } else {
+                        this.health3.alpha = 0;
+                    }
+                }
+
+                _phaser.time.addEvent({
+                    delay: 500,
+                    callback: () => {
+                        i = 0;
+                    }
+                })
+            }
+
+        });
     }
 
     resize() {
@@ -51,6 +92,7 @@ class PlayerModule {
         // управления
         if (this.cursor.left.isDown) {
             this.player.x -= this.SPEED;
+
             this.player.anims.play('left', true);
 
         } else if (this.cursor.right.isDown) {
@@ -58,7 +100,7 @@ class PlayerModule {
             this.player.anims.play('right', true);
 
         } else if (this.cursor.up.isDown){
-            this.player.y -= this.SPEED;       
+            this.player.y -= this.SPEED;     
             this.player.anims.play('up', true);
 
         } else if (this.cursor.down.isDown) {
@@ -84,6 +126,9 @@ class PlayerModule {
         if (this.player.y >= getSceneHeight()) {
             this.player.y -= this.SPEED;
         }
+
+        this.healthContainer.x = this.player.x;
+        this.healthContainer.y = this.player.y - 40;
     }
 
     getPlayer() {

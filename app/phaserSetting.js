@@ -40,6 +40,9 @@ const _bulletModule = new BulletModule();
 const _config = {
     type: Phaser.AUTO,
     parent: _battleFieldContentId,
+    physics: {
+        default: 'arcade'
+    },
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH
