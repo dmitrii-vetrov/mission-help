@@ -62,12 +62,12 @@ const _config = {
             window.addEventListener('resize', onResize);
             onResize();
 
-            _preloaderText.addEventListener('animationend', () => {
+            // _preloaderText.addEventListener('animationend', () => {
                 _phaser.time.addEvent({
-                    delay: 400,
+                    delay: 600,
                     callback: showBattleField
                 });
-            });
+            // });
         },
         update: function() {
             _mainContainer.update();

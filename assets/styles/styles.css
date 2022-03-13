@@ -68,13 +68,13 @@ body {
 
 .preloader__text_mishanya {
     padding: 0.1em 0.13em 0.01em 0.2em;
-    animation: mishanya 0.75s ease 0s forwards;
+    animation: mishanya 0.75s ease forwards;
 }
 
 .preloader__text_present {
     padding: 0.1em 0.2em 0.1em 0.05em;
     letter-spacing: -0.09em;
-    animation: present 0.75s ease 0s forwards;
+    animation: present 0.75s ease forwards;
 }
 
 @keyframes mishanya {

@@ -5,6 +5,7 @@ class GhostBossModule {
     isCanShoot = true;
     isToushXMin = false;
     isCanBossMove = true;
+    isCanPlayerFight = false;
 
 
     atackFists = [];
@@ -28,7 +29,7 @@ class GhostBossModule {
         this.fistOrigin.alpha = this.ghostBoss.alpha;
 
         let i = 0;
-        while (i < 10) {
+        while (i < 8) {
             this.atackFists.push(_phaser.add.sprite(-100, -100, 'ghostBossFist'));
 
             i++;
@@ -50,7 +51,7 @@ class GhostBossModule {
         _phaser.time.addEvent( {
             delay: 3000,
             callback: () => {
-                if(Phaser.Math.Between(0, 10) < 4){
+                if(Phaser.Math.Between(0, 10) < 4) {
                     this.doShoot();
                 }
             },
@@ -67,21 +68,23 @@ class GhostBossModule {
         _phaser.tweens.add({
             targets: this.fistOrigin,
             y: -this.fistOrigin.height,
-            duration: 300,
+            duration: 500,
             onStart: () => {
                 this.isCanBossMove = false;
+                this.ghostBoss.alpha = 1;
+                this.fistOrigin.alpha = 1;
             },
             onComplete: () => {
                 // кулаки летят вниз
                 _phaser.tweens.add({
                     targets: attackTargets,
                     y: getSceneHeight(),
-                    duration: 700,
+                    duration: 1500,
                     repeat: 0,
                     onStart: () => {
                         this.atackFists.forEach((fist, i) => {
                             fist.alpha = this.fistOrigin.alpha;
-                            fist.x = (getSceneWidth() / this.atackFists.length) * (i + 1);
+                            fist.x = (getSceneWidth() / this.atackFists.length) * (i + 0.5);
                             this.setAddFistsY(fist, i);
                         })
                     },
@@ -103,6 +106,8 @@ class GhostBossModule {
                                     repeat: 0,
                                     onComplete: () => {
                                         this.isCanBossMove = true;
+                                        this.ghostBoss.alpha = 0.6;
+                                        this.fistOrigin.alpha = 0.6;
                                     }
                                 })
                             },
