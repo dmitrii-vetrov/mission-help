@@ -23,7 +23,7 @@ class PlayerModule {
         this.player.setScale(0.25);
         this.player.setOrigin(0.5, 0.5);
 
-        this.iifes = liveFactory('health', 3);
+        this.iifes = liveFactory(this.player, 'health', 3);
 
         _phaser.anims.create({
             key: 'up',
@@ -111,8 +111,7 @@ class PlayerModule {
             this.player.y -= this.SPEED;
         }
 
-        this.iifes.container.x = this.player.x;
-        this.iifes.container.y = this.player.y - (this.player.height * this.player.scaleY) / 1.7;
+        this.iifes.updatePosition();
     }
 
     getPlayer() {
